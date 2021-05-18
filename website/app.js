@@ -28,6 +28,20 @@ async function getFunc(url) {
     }
 }
 
+async function getLocFunc(url) {
+    res = await fetch(url); //cross origin by default
+    console.log(res);
+    try {
+        dataEntryFetched = await res.json();
+        console.log('Locassssssssssss');
+        console.log(dataEntryFetched);
+        return dataEntryFetched;
+    }
+    catch
+    {
+        console.log('error while get');
+    }
+}
 
 
 //post route
@@ -87,8 +101,9 @@ async function Weather() {
     newObj = { date: d, tempreture: dataFetched, userResponse: feelEntry };
     console.log('assssss');
     console.log(newObj);
-    ali = await postFunc('http://localhost:3000/website',newObj);
-    console.log(ali);
+    locVarPost = await postFunc('http://localhost:3000/website',newObj);
+    locVarGet = await getLocFunc('http://localhost:3000/website');
+    console.log(locVarGet);
 
     updateUI(newObj);
 }
