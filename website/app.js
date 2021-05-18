@@ -3,7 +3,8 @@
 
 const urlBase = 'http:\\api.openweathermap.org/data/2.5/weather?zip='
 const urlKey = '&appid=ccd63a65da20bd800e00f5f2d4579ff9'
-const myServerUrl = '/website';
+const port = 3000 ; 
+const myServerUrl = `http:\\localhost:${port}`;
 let data = {};
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -34,8 +35,7 @@ async function getFunc(url) {
 //const postData =  (postFunc(url,data));
 
 async function postFunc(url, data) {
-    const res = await fetch
-        (url,
+    const res = await fetch(url ,
             {
                 method: 'POST',
                 credentials: 'same-origin',
@@ -87,7 +87,8 @@ async function Weather() {
     newObj = { date: d, tempreture: dataFetched, userResponse: feelEntry };
     console.log('assssss');
     console.log(newObj);
-    // postFunc(myServerUrl,newObj);
+    ali = await postFunc('http://localhost:3000/website',newObj);
+    console.log(ali);
 
     updateUI(newObj);
 }
