@@ -5,20 +5,18 @@ const urlBase = 'http:\\api.openweathermap.org/data/2.5/weather?zip='
 const urlKey = '&appid=ccd63a65da20bd800e00f5f2d4579ff9'
 const port = 3000 ; 
 const myServerUrl = `http:\\localhost:${port}`;
-let data = {};
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = (+d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
 
-//get route 
-//const getData = (getFunc(url));
+//get route from remote server
+
 
 async function getFunc(url) {
     res = await fetch(url); //cross origin by default
     console.log(res);
     try {
         dataEntryFetched = await res.json();
-        console.log('shorter assssssssssss');
         console.log(dataEntryFetched.main.temp);
         return dataEntryFetched.main.temp;
     }
@@ -28,12 +26,12 @@ async function getFunc(url) {
     }
 }
 
+//get route from local server
 async function getLocFunc(url) {
     res = await fetch(url); //cross origin by default
     console.log(res);
     try {
         dataEntryFetched = await res.json();
-        console.log('Locassssssssssss');
         console.log(dataEntryFetched);
         return dataEntryFetched;
     }
@@ -44,9 +42,7 @@ async function getLocFunc(url) {
 }
 
 
-//post route
-
-//const postData =  (postFunc(url,data));
+//post route to local server
 
 async function postFunc(url, data) {
     const res = await fetch(url ,
@@ -76,18 +72,6 @@ async function postFunc(url, data) {
 genElem = document.getElementById('generate');
 console.log(genElem);
 genElem.addEventListener("click", Weather);
-//3ak
-// const zipEntry = document.getElementById('zip');
-// const feelEntry = document.getElementById('feelings');
-// console.log (zipEntry);
-// dataFetched = getFunc(urlBase+zipEntry+urlKey)
-// newObj = {data:d , tempreture: zipEntry, userResponse:feelEntry};
-// console.log(`the data we got is ${dataFetched}`);
-//end 3ak
-//call get route
-
-
-//call post route
 
 //post weather
 
@@ -99,10 +83,14 @@ async function Weather() {
     console.log(urlBase + zipEntry + urlKey);
     dataFetched = await getFunc(urlBase + zipEntry + urlKey);
     newObj = { date: d, tempreture: dataFetched, userResponse: feelEntry };
-    console.log('assssss');
     console.log(newObj);
-    locVarPost = await postFunc('http://localhost:3000/website',newObj);
-    locVarGet = await getLocFunc('http://localhost:3000/website');
+    
+    /*commented functions since the local server returns pending promise*/
+    //locVarPost = await postFunc('http://localhost:3000/website',newObj); 
+    //locVarGet  = await getLocFunc('http://localhost:3000/website');
+    /*end of commented functions */
+
+    console.log(locVarPost);
     console.log(locVarGet);
 
     updateUI(newObj);

@@ -25,7 +25,7 @@ function serverCbk ()
 }
 
 //setting get route
-//const url = `http://localhost:${port}`;
+//The url is `http://localhost:${port}`;
 app.get('/website'/*url*/  , clientGetData) ; 
 function clientGetData (req,res)
 {
@@ -37,24 +37,24 @@ function clientGetData (req,res)
 app.post('/website'  , clientPostData) ; 
 
 function clientPostData (req,res)
-{console.log('we entered1');
+{//console.log('we reached here 1');
     try
-    {console.log('we entered2');
+    {//console.log('we reached here 2');
 newEntry=
     {
         temperature: req.body.temperature,
         date: req.body.date,
         userResponse: req.body.userResponse
     }
-    console.log('we entered3');
+    //console.log('we reached here 3');
 projectData=(newEntry);
 projectDataArr.push = projectData ;
 console.log (projectData) ;
 res.send('done');
     }
     catch 
-    {console.log('we entered4');
+    {   //console.log('we reached here 4');
         console.log('error sever');
     }
-    console.log('we entered5');
+    //console.log('we reached here 5');
 }
