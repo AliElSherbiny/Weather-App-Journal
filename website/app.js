@@ -1,7 +1,7 @@
 /* Global Variables */
 
 
-const urlBase = 'http:\\api.openweathermap.org/data/2.5/weather?zip='
+const urlBase = 'http://api.openweathermap.org/data/2.5/weather?zip='
 const urlKey = '&appid=ccd63a65da20bd800e00f5f2d4579ff9'
 const port = 3000 ; 
 const myServerUrl = `http:\\localhost:${port}`;
@@ -13,7 +13,7 @@ let newDate = (+d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
 
 
 async function getFunc(url) {
-    res = await fetch(url); //cross origin by default
+    res = await fetch( url); //cross origin by default
     console.log(res);
     try {
         dataEntryFetched = await res.json();
