@@ -3,7 +3,7 @@
 
 const urlBase = 'https://api.openweathermap.org/data/2.5/weather?zip='
 const urlKey = '&appid=ccd63a65da20bd800e00f5f2d4579ff9'
-const port = 3000 ; 
+const port = 3001 ; 
 const myServerUrl = `http:\\localhost:${port}`;
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -13,7 +13,7 @@ let newDate = (+d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
 
 
 async function getFunc(url) {
-    res = await fetch( url); //cross origin by default
+    res = await fetch( url);//,{mode:'no-cors'}); //cross origin by default
     console.log(res);
     try {
         dataEntryFetched = await res.json();
@@ -82,23 +82,24 @@ async function Weather() {
     console.log(zipEntry, feelEntry);
     console.log(urlBase + zipEntry + urlKey);
     dataFetched = await getFunc(urlBase + zipEntry + urlKey);
-    newObj = { date: d, tempreture: dataFetched, userResponse: feelEntry };
+    newObj = { date: d, temperature: dataFetched, userResponse: feelEntry };
     console.log(newObj);
     
     /*commented functions since the local server returns pending promise*/
-    //locVarPost = await postFunc('http://localhost:3000/website',newObj); 
+    locVarPost = await postFunc('http://localhost:3001/website',newObj); 
     //locVarGet  = await getLocFunc('http://localhost:3000/website');
     /*end of commented functions */
-
+    console.log('the return from PPPOOOSSStttttttttttttttttttttttttttt');
     console.log(locVarPost);
-    console.log(locVarGet);
+   // console.log('the return from getttttttttttttttttttttttttttt');
+   // console.log(locVarGet);
 
     updateUI(newObj);
 }
 
 function updateUI(newObj) {
     document.getElementById('date').innerHTML = newObj.date;
-    document.getElementById('temp').innerHTML = newObj.tempreture;
+    document.getElementById('temp').innerHTML = newObj.temperature;
     document.getElementById('content').innerHTML = newObj.userResponse;
 
 }

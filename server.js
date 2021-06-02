@@ -10,7 +10,6 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 // Cors for cross origin allowance
 const cors = require('cors'); 
 app.use(cors());
@@ -29,7 +28,10 @@ function serverCbk ()
 app.get('/website'/*url*/  , clientGetData) ; 
 function clientGetData (req,res)
 {
-    res.send('Hello world');
+
+    //res.send('Hello world');
+    console.log ('we reached get');
+    console.log (projectData);
     res.send(projectData);
 }
 
@@ -37,24 +39,29 @@ function clientGetData (req,res)
 app.post('/website'  , clientPostData) ; 
 
 function clientPostData (req,res)
-{//console.log('we reached here 1');
+{
+    console.log ('we reached post');
+    //res.send('done really');
+
+    console.log('we reached here 1');
     try
-    {//console.log('we reached here 2');
+    {console.log('we reached here 2');
 newEntry=
     {
-        temperature: req.body.temperature,
         date: req.body.date,
+        temperature: req.body.temperature,
         userResponse: req.body.userResponse
     }
-    //console.log('we reached here 3');
+    console.log('we reached here 3');
 projectData=(newEntry);
 projectDataArr.push = projectData ;
 console.log (projectData) ;
 res.send('done');
     }
     catch 
-    {   //console.log('we reached here 4');
+    {   console.log('we reached here 4');
         console.log('error sever');
     }
-    //console.log('we reached here 5');
+    console.log('we reached here 5');
+    
 }
