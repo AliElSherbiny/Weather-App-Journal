@@ -81,7 +81,7 @@ async function Weather() {
 
 
     /*Updating UI based on the success of previous promises*/ 
-    .then(result => 
+    .then(() => 
  {
     document.getElementById('date').innerHTML = newObj.date;
     document.getElementById('temp').innerHTML = newObj.temperature;
