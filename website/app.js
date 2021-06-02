@@ -9,9 +9,8 @@ const myServerUrl = `http:\\localhost:${port}`;
 let d = new Date();
 let newDate = (+d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
 
+
 //get route from remote server
-
-
 async function getFunc(url) {
     res = await fetch( url);//,{mode:'no-cors'}); //cross origin by default
     console.log(res);
@@ -26,79 +25,67 @@ async function getFunc(url) {
     }
 }
 
-//get route from local server
-async function getLocFunc(url) {
-    res = await fetch(url); //cross origin by default
-    console.log(res);
-    try {
-        dataEntryFetched = await res.json();
-        console.log(dataEntryFetched);
-        return dataEntryFetched;
-    }
-    catch
-    {
-        console.log('error while get');
-    }
-}
-
-
-//post route to local server
-
-async function postFunc(url, data) {
-    const res = await fetch(url ,
-            {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers:
-                {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        );
-
-    try {
-        return res;
-    } catch {
-        console.log('post failed');
-        // appropriately handle the error
-    }
-
-}
 
 //generate ID
-
 genElem = document.getElementById('generate');
 console.log(genElem);
 genElem.addEventListener("click", Weather);
 
 //post weather
-
 /*take the entered data then call get then post func*/
 async function Weather() {
     const zipEntry = document.getElementById('zip').value;
     const feelEntry = document.getElementById('feelings').value;
     console.log(zipEntry, feelEntry);
     console.log(urlBase + zipEntry + urlKey);
-    dataFetched = await getFunc(urlBase + zipEntry + urlKey);
-    newObj = { date: d, temperature: dataFetched, userResponse: feelEntry };
-    console.log(newObj);
+    dataFetched = await getFunc(urlBase + zipEntry + urlKey)
     
-    /*commented functions since the local server returns pending promise*/
-    locVarPost = await postFunc('http://localhost:3001/website',newObj); 
-    locVarGet  = await getLocFunc('http://localhost:3001/website');
-    /*end of commented functions */
-    console.log('the return from PPPOOOSSStttttttttttttttttttttttttttt');
-    console.log(locVarPost);
-    console.log('the return from getttttttttttttttttttttttttttt');
-    console.log(locVarGet);
+    /*Posting to local server*/ 
+    .then(async(dataFetched)=>{
+        newObj = { date: d, temperature: dataFetched, userResponse: feelEntry };
+        const res = await fetch('http://localhost:3001/website' ,
+                {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers:
+                    {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newObj),
+                }
+            );
+    
+        try {
+            return res;
+        } catch {
+            console.log('post failed');
+            // appropriately handle the error
+        }
+    
+    })
 
-    updateUI(newObj);
-}
+    /*Getting from local server*/ 
+    .then(async()=>{
+        res = await fetch('http://localhost:3001/website'); //cross origin by default
+        console.log(res);
+        try {
+            dataEntryFetched = await res.json();
+            console.log(dataEntryFetched);
+            return dataEntryFetched;
+        }
+        catch
+        {
+            console.log('error while get');
+        }
+    })
 
-function updateUI(newObj) {
+
+    /*Updating UI based on the success of previous promises*/ 
+    .then(result => 
+ {
     document.getElementById('date').innerHTML = newObj.date;
     document.getElementById('temp').innerHTML = newObj.temperature;
     document.getElementById('content').innerHTML = newObj.userResponse;
 
+});
 }
