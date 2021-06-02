@@ -58,7 +58,6 @@ async function postFunc(url, data) {
         );
 
     try {
-        //   const recData = await res.json();
         return res;
     } catch {
         console.log('post failed');
@@ -87,12 +86,12 @@ async function Weather() {
     
     /*commented functions since the local server returns pending promise*/
     locVarPost = await postFunc('http://localhost:3001/website',newObj); 
-    //locVarGet  = await getLocFunc('http://localhost:3000/website');
+    locVarGet  = await getLocFunc('http://localhost:3001/website');
     /*end of commented functions */
     console.log('the return from PPPOOOSSStttttttttttttttttttttttttttt');
     console.log(locVarPost);
-   // console.log('the return from getttttttttttttttttttttttttttt');
-   // console.log(locVarGet);
+    console.log('the return from getttttttttttttttttttttttttttt');
+    console.log(locVarGet);
 
     updateUI(newObj);
 }

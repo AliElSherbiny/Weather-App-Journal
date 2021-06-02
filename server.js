@@ -40,28 +40,32 @@ app.post('/website'  , clientPostData) ;
 
 function clientPostData (req,res)
 {
-    console.log ('we reached post');
+    //console.log ('we reached post');
     //res.send('done really');
 
     console.log('we reached here 1');
     try
-    {console.log('we reached here 2');
+    {//console.log('we reached here 2');
 newEntry=
     {
         date: req.body.date,
         temperature: req.body.temperature,
         userResponse: req.body.userResponse
     }
-    console.log('we reached here 3');
+//    console.log('we reached here 3');
 projectData=(newEntry);
 projectDataArr.push = projectData ;
 console.log (projectData) ;
-res.send('done');
+res.status (231);
+console.log ('server response:');
+console.log(res.statusCode);
+res.end();
+
     }
     catch 
-    {   console.log('we reached here 4');
+    {  // console.log('we reached here 4');
         console.log('error sever');
     }
-    console.log('we reached here 5');
+   // console.log('we reached here 5');
     
 }
