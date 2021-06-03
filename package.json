@@ -1,0 +1,23 @@
+{
+  "name": "weather-journal-app",
+  "version": "1.0.0",
+  "description": "This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "browserify": "^17.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsdom": "^16.5.3",
+    "remote-origin-url": "^2.0.0",
+    "serve": "^11.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
