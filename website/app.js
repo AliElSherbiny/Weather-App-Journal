@@ -3,6 +3,7 @@
 
 const urlBase = 'https://api.openweathermap.org/data/2.5/weather?zip='
 const urlKey = '&appid=ccd63a65da20bd800e00f5f2d4579ff9'
+const urlUnit = '&units=imperial'
 const port = 3001 ; 
 const myServerUrl = `http:\\localhost:${port}`;
 // Create a new date instance dynamically with JS
@@ -37,8 +38,8 @@ async function Weather() {
     const zipEntry = document.getElementById('zip').value;
     const feelEntry = document.getElementById('feelings').value;
     console.log(zipEntry, feelEntry);
-    console.log(urlBase + zipEntry + urlKey);
-    dataFetched = await getFunc(urlBase + zipEntry + urlKey)
+    console.log(urlBase + zipEntry + urlKey+urlUnit);
+    dataFetched = await getFunc(urlBase + zipEntry + urlKey+urlUnit)
     
     /*Posting to local server*/ 
     .then(async(dataFetched)=>{
@@ -84,7 +85,7 @@ async function Weather() {
     .then(() => 
  {
     document.getElementById('date').innerHTML = newObj.date;
-    document.getElementById('temp').innerHTML = newObj.temperature;
+    document.getElementById('temp').innerHTML = newObj.temperature + '  Fahrenheit';
     document.getElementById('content').innerHTML = newObj.userResponse;
 
 });
